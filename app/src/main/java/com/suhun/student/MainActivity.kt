@@ -9,12 +9,14 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.suhun.student.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var student:Student
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,15 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun result(view: View){
+        var name = binding.contentLayout.name.text.toString()
+        var math = binding.contentLayout.math.text.toString().toInt()
+        var english = binding.contentLayout.chinese.text.toString().toInt()
+        student = Student(name, math, english)
+        binding.contentLayout.average.text = student.getAverage().toString()
+        binding.contentLayout.grade.text = student.getGrade()
     }
 
 }
